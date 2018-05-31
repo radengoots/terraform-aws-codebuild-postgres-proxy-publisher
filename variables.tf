@@ -24,12 +24,14 @@ variable "service_role" {
 }
 
 variable "compute_type" {
+  type        = "string"
   description = "https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html"
   default     = "BUILD_GENERAL1_SMALL"
 }
 
 variable "image" {
-  description = "https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-available.html"
+  type        = "string"
+  description = "Docker image for building and testing binary, overridable by publicly available image from docker hub or AWS provided images"
   default     = "traveloka/postgresql-proxy-builder:latest"
 }
 
