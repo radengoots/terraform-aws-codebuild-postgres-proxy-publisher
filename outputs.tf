@@ -1,4 +1,4 @@
 output "codebuild_project" {
-  description = "CodeBuild project name"
+  description = "The name of CodeBuild project"
   value       = "${aws_codebuild_project.this.name}"
 }

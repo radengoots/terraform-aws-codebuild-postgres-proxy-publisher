@@ -1,6 +1,6 @@
 resource "aws_codebuild_project" "this" {
-  name         = "${replace("TvSQLPublisher_${var.project_path}", "/", "_")}"
-  description  = "CodeBuild project for publishing ${var.project_path} proxy binary"
+  name         = "${var.product_domain}-${var.jar_name}"
+  description  = "CodeBuild project for publishing ${var.product_domain}_${var.jar_name} proxy binary"
   service_role = "${data.aws_iam_role.code_build_service_role.arn}"
 
   artifacts {
@@ -17,5 +17,12 @@ resource "aws_codebuild_project" "this" {
     type      = "GITHUB"
     location  = "${var.source_location}"
     buildspec = "${data.template_file.buildspec.rendered}"
+  }
+
+  tags {
+    "ProductDomain" = "${var.product_domain}"
+    "JarName"       = "${var.jar_name}"
+    "Description"   = "${local.description}"
+    "Environment"   = "${local.environment}"
   }
 }

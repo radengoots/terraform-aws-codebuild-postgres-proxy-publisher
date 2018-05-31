@@ -1,16 +1,26 @@
-variable "source_location" {
-  description = "Link to github repository"
+variable "product_domain" {
   type        = "string"
+  description = "Binary Owner"
+}
+
+variable "jar_name" {
+  type        = "string"
+  description = "Jar name, e.g. rules-engine-repository-db-proxy"
+}
+
+variable "source_location" {
+  type        = "string"
+  description = "Link to github repository"
 }
 
 variable "project_path" {
-  description = "Relative path to the project"
   type        = "string"
+  description = "Relative path to the project"
 }
 
 variable "service_role" {
-  description = "Service role name"
   type        = "string"
+  description = "Service role name"
 }
 
 variable "compute_type" {
