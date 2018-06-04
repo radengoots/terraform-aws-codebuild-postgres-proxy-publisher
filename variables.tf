@@ -8,9 +8,15 @@ variable "jar_name" {
   description = "Jar name, e.g. rules-engine-repository-db-proxy"
 }
 
+variable "source_type" {
+  type        = "string"
+  description = "Source type supported by CodeBuild, refer to https://www.terraform.io/docs/providers/aws/r/codebuild_project.html#type-4"
+  default     = "GITHUB"
+}
+
 variable "source_location" {
   type        = "string"
-  description = "Link to github repository"
+  description = "Link to git repository"
 }
 
 variable "project_path" {
@@ -35,3 +41,8 @@ variable "image" {
   default     = "traveloka/postgresql-proxy-builder:latest"
 }
 
+variable "git_clone_depth" {
+  type        = "string"
+  description = "Depth of git repository being cloned. 0 means full clone"
+  default     = 0
+}

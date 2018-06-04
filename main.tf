@@ -14,9 +14,10 @@ resource "aws_codebuild_project" "this" {
   }
 
   source {
-    type      = "GITHUB"
-    location  = "${var.source_location}"
-    buildspec = "${data.template_file.buildspec.rendered}"
+    type            = "${var.source_type}"
+    location        = "${var.source_location}"
+    buildspec       = "${data.template_file.buildspec.rendered}"
+    git_clone_depth = "${var.git_clone_depth}"
   }
 
   tags {
