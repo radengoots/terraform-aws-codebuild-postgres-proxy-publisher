@@ -18,13 +18,14 @@ phases:
       - cd /home/docker/app
       - "chown -R docker: ."
       - su docker -c 'chmod -R +x .'
-      - $(./aws-sudo.sh -d 3600 arn:aws:iam::517530806209:role/beiartf-reader-ff59caa9b4b093d9 | sed s/AWS_/BEIARTF_/g)
+      - $(./aws-sudo.sh -d 3600 $${assumed_role_arn} | sed s/AWS_/BEIARTF_/g)
       - su docker -c './gradlew :$${project_path}:initDBEnv'
       - su docker -c './deploy_library.sh $${project_path} -r'
 EOF
 
   vars {
-    project_path = "${replace(var.project_path, "/", ":")}"
+    assumed_role_arn  = "${var.assumed_role_arn}"
+    project_path      = "${replace(var.project_path, "/", ":")}"
   }
 }
 

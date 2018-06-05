@@ -46,3 +46,9 @@ variable "git_clone_depth" {
   description = "Depth of git repository being cloned. 0 means full clone"
   default     = 0
 }
+
+variable "assumed_role_arn" {
+  type        = "string"
+  description = "Assumed role arn for deploying artifact to beiartf"
+  default     = "arn:aws:iam::517530806209:role/external/beiartf-ci-write-c2222c8fc7e70efc"
+}
