@@ -19,6 +19,7 @@ phases:
       - "chown -R docker: ."
       - su docker -c 'chmod -R +x .'
       - $(./aws-sudo.sh -d 3600 $${assumed_role_arn} | sed s/AWS_/BEIARTF_/g)
+      - su docker -c '$${pre_build_commands}'
       - su docker -c './gradlew :$${project_path}:initDBEnv'
       - su docker -c './deploy_library.sh $${project_path} -r'
 EOF
@@ -26,6 +27,7 @@ EOF
   vars {
     assumed_role_arn  = "${var.assumed_role_arn}"
     project_path      = "${replace(var.project_path, "/", ":")}"
+    pre_build_commands= "${join("'\n      - su docker -c '", var.pre_build_commands)}"
   }
 }
 

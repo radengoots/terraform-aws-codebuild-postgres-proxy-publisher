@@ -52,3 +52,9 @@ variable "assumed_role_arn" {
   description = "Assumed role arn for deploying artifact to beiartf"
   default     = "arn:aws:iam::517530806209:role/external/beiartf-ci-write-c2222c8fc7e70efc"
 }
+
+variable "pre_build_commands" {
+  type        = "list"
+  description = "List of command to run before the build started"
+  default     = []
+}
